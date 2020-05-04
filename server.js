@@ -66,15 +66,11 @@ app.use(authRoutes);
 app.use(errorController.get404);
 
 mongoose
-<<<<<<< HEAD:server.js
-  .connect(MONGODB_URI)
-=======
   .connect(MONGODB_URI,{
   
       useUnifiedTopology: true,
       useNewUrlParser: true,
       })
->>>>>>> 2c7693ab9c68933f5589b5b0b4cd69ce7aa3cf79:app.js
   .then(result => {
     app.listen(3000);
   })
