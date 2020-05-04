@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 const fs = require('fs');
 const path = require('path');
 
 const PDFDocument = require('pdfkit');
 
-=======
->>>>>>> 2c7693ab9c68933f5589b5b0b4cd69ce7aa3cf79
 const Product = require('../models/product');
 const Order = require('../models/order');
 
@@ -20,7 +17,9 @@ exports.getProducts = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
@@ -34,7 +33,11 @@ exports.getProduct = (req, res, next) => {
         path: '/products'
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.getIndex = (req, res, next) => {
@@ -47,7 +50,9 @@ exports.getIndex = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
@@ -63,7 +68,11 @@ exports.getCart = (req, res, next) => {
         products: products
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.postCart = (req, res, next) => {
@@ -75,6 +84,11 @@ exports.postCart = (req, res, next) => {
     .then(result => {
       console.log(result);
       res.redirect('/cart');
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
@@ -85,7 +99,11 @@ exports.postCartDeleteProduct = (req, res, next) => {
     .then(result => {
       res.redirect('/cart');
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.postOrder = (req, res, next) => {
@@ -111,7 +129,11 @@ exports.postOrder = (req, res, next) => {
     .then(() => {
       res.redirect('/orders');
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.getOrders = (req, res, next) => {
@@ -123,7 +145,6 @@ exports.getOrders = (req, res, next) => {
         orders: orders
       });
     })
-<<<<<<< HEAD
     .catch(err => {
       const error = new Error(err);
       error.httpStatusCode = 500;
@@ -191,7 +212,4 @@ exports.getInvoice = (req, res, next) => {
       // file.pipe(res);
     })
     .catch(err => next(err));
-=======
-    .catch(err => console.log(err));
->>>>>>> 2c7693ab9c68933f5589b5b0b4cd69ce7aa3cf79
 };

@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-        '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'
+        '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'
     }
   })
 );
@@ -77,43 +77,6 @@ exports.postLogin = (req, res, next) => {
 exports.postSignup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-<<<<<<< HEAD
-
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    console.log(errors.array());
-    return res.status(422).render('auth/signup', {
-      path: '/signup',
-      pageTitle: 'Signup',
-      errorMessage: errors.array()[0].msg,
-      oldInput: {
-        email: email,
-        password: password,
-        confirmPassword: req.body.confirmPassword
-      },
-      validationErrors: errors.array()
-    });
-  }
-
-  bcrypt
-    .hash(password, 12)
-    .then(hashedPassword => {
-      const user = new User({
-        email: email,
-        password: hashedPassword,
-        cart: { items: [] }
-      });
-      return user.save();
-    })
-    .then(result => {
-      res.redirect('/login');
-      // return transporter.sendMail({
-      //   to: email,
-      //   from: 'shop@node-complete.com',
-      //   subject: 'Signup succeeded!',
-      //   html: '<h1>You successfully signed up!</h1>'
-      // });
-=======
   const confirmPassword = req.body.confirmPassword;
   User.findOne({ email: email })
     .then(userDoc => {
@@ -138,7 +101,7 @@ exports.postSignup = (req, res, next) => {
           res.redirect('/login');
           return transporter.sendMail({
             to: email,
-            from: 'shop@node-complete.com',
+            from: 'afreenhussain866@gmail.com',
             subject: 'Signup succeeded!',
             html: '<h1>You successfully signed up!</h1>'
           });
@@ -146,7 +109,6 @@ exports.postSignup = (req, res, next) => {
         .catch(err => {
           console.log(err);
         });
->>>>>>> 2c7693ab9c68933f5589b5b0b4cd69ce7aa3cf79
     })
     .catch(err => {
       console.log(err);
@@ -195,7 +157,7 @@ exports.postReset = (req, res, next) => {
         res.redirect('/');
         transporter.sendMail({
           to: req.body.email,
-          from: 'shop@node-complete.com',
+          from: 'afreenhussain866@gmail.com',
           subject: 'Password reset',
           html: `
             <p>You requested a password reset</p>
