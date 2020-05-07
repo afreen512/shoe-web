@@ -13,7 +13,7 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 
 const MONGODB_URI =
-  'mongodb+srv://afreen:afreen@cluster0-6nwcm.mongodb.net/test?retryWrites=true&w=majority';
+'mongodb+srv://afreen:afreen@cluster0-6nwcm.mongodb.net/test?retryWrites=true&w=majority';
 
 const app = express();
 const store = new MongoDBStore({
