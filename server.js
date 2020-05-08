@@ -8,13 +8,12 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
 const multer = require('multer');
-const { uuid } = require('uuidv4');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
 
 const MONGODB_URI =
-  'mongodb+srv://afreen:afreen@cluster0-6nwcm.mongodb.net/test?retryWrites=true&w=majority';
+  'mongodb+srv://maximilian:9u4biljMQc4jjqbe@cluster0-ntrwp.mongodb.net/shop';
 
 const app = express();
 const store = new MongoDBStore({
@@ -28,7 +27,7 @@ const fileStorage = multer.diskStorage({
     cb(null, 'images');
   },
   filename: (req, file, cb) => {
-    cb(null, new Date().getMilliseconds().toString() + '-' + file.originalname);
+    cb(null, new Date().toISOString() + '-' + file.originalname);
   }
 });
 
@@ -65,7 +64,6 @@ app.use(
     store: store
   })
 );
-console.log(uuid());
 app.use(csrfProtection);
 app.use(flash());
 
@@ -112,13 +110,9 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(MONGODB_URI,{
-  
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-      })
+  .connect(MONGODB_URI)
   .then(result => {
-    app.listen(process.env.PORT || 3000);
+    app.listen(3000);
   })
   .catch(err => {
     console.log(err);
