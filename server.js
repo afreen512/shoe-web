@@ -13,7 +13,7 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 
 const MONGODB_URI =
-'mongodb+srv://afreen:afreen@cluster0-6nwcm.mongodb.net/test?retryWrites=true&w=majority';
+  'mongodb+srv://afreen:afreen@cluster0-6nwcm.mongodb.net/test?retryWrites=true&w=majority';
 
 const app = express();
 const store = new MongoDBStore({
@@ -110,9 +110,14 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(MONGODB_URI)
+  .connect(MONGODB_URI,{
+  
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+      })
+
   .then(result => {
-    app.listen(process.env.PORT || 3000);
+    app.listen(3000);
   })
   .catch(err => {
     console.log(err);
